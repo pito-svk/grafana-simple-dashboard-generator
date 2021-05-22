@@ -33,6 +33,7 @@ var (
 	mode     string
 	output   string
 	filepath string
+	title    string
 )
 
 var initCmd = &cobra.Command{
@@ -66,4 +67,5 @@ func init() {
 	initCmd.Flags().StringVarP(&mode, "mode", "m", "basic", "dashboard mode")
 	initCmd.Flags().StringVarP(&output, "output", "o", "console", "specify output mode")
 	initCmd.Flags().StringVarP(&filepath, "filepath", "f", "", "specify a filepath to generate dashboards")
+	initCmd.Flags().StringVar(&filepath, "title", "Server monitoring", "specify a title for dashboard")
 }
