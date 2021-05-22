@@ -27,7 +27,7 @@ import (
 
 var cfgFile string
 
-avar rootCmd = &cobra.Command{
+var rootCmd = &cobra.Command{
 	Use:   "grafana-simple-dashboard-generator",
 	Short: "Generate simple grafana dashboard based on your needs",
 }
