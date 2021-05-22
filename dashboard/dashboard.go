@@ -31,15 +31,21 @@ type GrafanaDashboardConfigTime struct {
 	To   string `json:"to"`
 }
 
+type GrafanaDashboardConfigTimepicker struct {
+	RefreshIntervals []string `json:"refresh_intervals"`
+	TimeOptions      []string `json:"time_options"`
+}
+
 type GrafanaDashboardConfig struct {
-	Id           *string                     `json:"id"`
-	Uid          *string                     `json:"uid"`
-	Title        *string                     `json:"title"`
-	Style        *string                     `json:"style"`
-	Timezone     string                      `json:"timezone"`
-	Editable     bool                        `json:"editable"`
-	GraphTooltip int                         `json:"graphTooltip"`
-	Time         *GrafanaDashboardConfigTime `json:"time"`
+	Id           *string                           `json:"id"`
+	Uid          *string                           `json:"uid"`
+	Title        *string                           `json:"title"`
+	Style        *string                           `json:"style"`
+	Timezone     string                            `json:"timezone"`
+	Editable     bool                              `json:"editable"`
+	GraphTooltip int                               `json:"graphTooltip"`
+	Time         *GrafanaDashboardConfigTime       `json:"time"`
+	Timepicker   *GrafanaDashboardConfigTimepicker `json:"timepicker"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
@@ -50,6 +56,32 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
-		Time:         &GrafanaDashboardConfigTime{From: "now-6h", To: "now"},
+		Time: &GrafanaDashboardConfigTime{
+			From: "now-6h",
+			To:   "now",
+		},
+		Timepicker: &GrafanaDashboardConfigTimepicker{
+			RefreshIntervals: []string{
+				"5s",
+				"10s",
+				"30s",
+				"1m",
+				"5m",
+				"15m",
+				"30m",
+				"1h",
+				"2h",
+				"1d"},
+			TimeOptions: []string{
+				"5m",
+				"15m",
+				"1h",
+				"6h",
+				"12h",
+				"24h",
+				"2d",
+				"7d",
+				"30d"},
+		},
 	}
 }
