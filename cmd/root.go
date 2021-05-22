@@ -22,7 +22,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "grafana-simple-dashboard-generator",
-	Short: "Generate simple grafana dashboard based on your needs",
+	Short: "Grafana simple dashboard generator",
 }
 
 func Execute() {
