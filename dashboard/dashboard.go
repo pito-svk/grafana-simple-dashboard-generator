@@ -22,9 +22,9 @@ THE SOFTWARE.
 package dashboard
 
 type GrafanaDashboardConfig struct {
-	Id string `json:"id"`
+	Id *string `json:"id"`
 }
 
 func GenerateDashboard() interface{} {
-	return &GrafanaDashboardConfig{Id: ""}
+	return &GrafanaDashboardConfig{Id: nil}
 }
