@@ -26,14 +26,20 @@ type GrafanaDashboardParams struct {
 	Style string
 }
 
+type GrafanaDashboardConfigTime struct {
+	From string `json:"from"`
+	To   string `json:"to"`
+}
+
 type GrafanaDashboardConfig struct {
-	Id           *string `json:"id"`
-	Uid          *string `json:"uid"`
-	Title        *string `json:"title"`
-	Style        *string `json:"style"`
-	Timezone     string  `json:"timezone"`
-	Editable     bool    `json:"editable"`
-	GraphTooltip int     `json:"graphTooltip"`
+	Id           *string                     `json:"id"`
+	Uid          *string                     `json:"uid"`
+	Title        *string                     `json:"title"`
+	Style        *string                     `json:"style"`
+	Timezone     string                      `json:"timezone"`
+	Editable     bool                        `json:"editable"`
+	GraphTooltip int                         `json:"graphTooltip"`
+	Time         *GrafanaDashboardConfigTime `json: "time"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
@@ -44,5 +50,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
+		Time:         &GrafanaDashboardConfigTime{From: "now-6h", To: "now"},
 	}
 }
