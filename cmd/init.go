@@ -22,8 +22,10 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 
+	"github.com/pito-svk/grafana-simple-dashboard-generator/dashboard"
 	"github.com/spf13/cobra"
 )
 
@@ -36,8 +38,6 @@ var (
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Generate new grafana dashboard",
-	Run: func(cmd *cobra.Command, args []string) {
-	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if output != "console" && output != "file" {
 			return fmt.Errorf("invalid value for output. Allowed values: [\"console\", \"file\"]")
@@ -50,6 +50,12 @@ var initCmd = &cobra.Command{
 		if output == "file" && filepath == "" {
 			return fmt.Errorf("filepath is required when output is \"file\"")
 		}
+
+		dashboard := dashboard.GenerateDashboard()
+		jsonRes, _ := json.Marshal(dashboard)
+
+		fmt.Println("...")
+		fmt.Println(string(jsonRes))
 
 		return nil
 	},
