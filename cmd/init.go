@@ -28,7 +28,7 @@ import (
 )
 
 var (
-	mode     string
+	mode string
 )
 
 // initCmd represents the init command
@@ -36,8 +36,7 @@ var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Generate new grafana dashboard",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("init called")
-		fmt.Println(mode)
+
 	},
 }
 
