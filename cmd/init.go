@@ -26,7 +26,8 @@ import (
 )
 
 var (
-	mode string
+	mode   string
+	output string
 )
 
 // initCmd represents the init command
@@ -40,5 +41,7 @@ var initCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(initCmd)
+
 	initCmd.Flags().StringVarP(&mode, "mode", "m", "basic", "dashboard mode")
+	initCmd.Flags().StringVarP(&output, "output", "o", "console", "specify output mode")
 }
