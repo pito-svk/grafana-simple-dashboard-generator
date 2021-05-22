@@ -27,11 +27,9 @@ import (
 
 var cfgFile string
 
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
+avar rootCmd = &cobra.Command{
 	Use:   "grafana-simple-dashboard-generator",
-	Short: "A brief description of your application",
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Short: "Generate simple grafana dashboard based on your needs",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
