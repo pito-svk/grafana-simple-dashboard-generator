@@ -39,7 +39,7 @@ type GrafanaDashboardConfig struct {
 	Timezone     string                      `json:"timezone"`
 	Editable     bool                        `json:"editable"`
 	GraphTooltip int                         `json:"graphTooltip"`
-	Time         *GrafanaDashboardConfigTime `json: "time"`
+	Time         *GrafanaDashboardConfigTime `json:"time"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
