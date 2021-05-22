@@ -22,6 +22,8 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -34,6 +36,13 @@ var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Generate new grafana dashboard",
 	Run: func(cmd *cobra.Command, args []string) {
+	},
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if output != "console" && output != "file" {
+			return fmt.Errorf("invalid value for output. Allowed values are: [\"console\", \"file\"]")
+		}
+
+		return nil
 	},
 }
 
