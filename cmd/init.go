@@ -52,7 +52,7 @@ var initCmd = &cobra.Command{
 		}
 
 		dashboard := dashboard.GenerateDashboard()
-		jsonRes, _ := json.Marshal(dashboard)
+		jsonRes, _ := json.MarshalIndent(dashboard, "", "	")
 
 		fmt.Println(string(jsonRes))
 

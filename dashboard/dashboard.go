@@ -22,8 +22,8 @@ THE SOFTWARE.
 package dashboard
 
 type GrafanaDashboardConfig struct {
-	Id *string `json:"id"`
-	Uid *string `json:"uid"`
+	Id    *string `json:"id"`
+	Uid   *string `json:"uid"`
 	Title *string `json:"title"`
 }
 
