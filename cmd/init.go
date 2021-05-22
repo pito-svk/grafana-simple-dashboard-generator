@@ -34,7 +34,6 @@ var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Generate new grafana dashboard",
 	Run: func(cmd *cobra.Command, args []string) {
-
 	},
 }
 
