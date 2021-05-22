@@ -27,12 +27,15 @@ type GrafanaDashboardParams struct {
 }
 
 type GrafanaDashboardConfig struct {
-	Id    *string `json:"id"`
-	Uid   *string `json:"uid"`
-	Title *string `json:"title"`
-	Style *string `json:"style"`
+	Id       *string `json:"id"`
+	Uid      *string `json:"uid"`
+	Title    *string `json:"title"`
+	Style    *string `json:"style"`
+	Timezone *string `json:"timezone"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
-	return &GrafanaDashboardConfig{Id: nil, Title: &params.Title, Style: &params.Style}
+	timezone := "browser"
+
+	return &GrafanaDashboardConfig{Id: nil, Title: &params.Title, Style: &params.Style, Timezone: &timezone}
 }
