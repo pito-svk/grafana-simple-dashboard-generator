@@ -23,14 +23,16 @@ package dashboard
 
 type GrafanaDashboardParams struct {
 	Title string
+	Style string
 }
 
 type GrafanaDashboardConfig struct {
 	Id    *string `json:"id"`
 	Uid   *string `json:"uid"`
 	Title *string `json:"title"`
+	Style *string `json:"style"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
-	return &GrafanaDashboardConfig{Id: nil, Title: &params.Title}
+	return &GrafanaDashboardConfig{Id: nil, Title: &params.Title, Style: &params.Style}
 }
