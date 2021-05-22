@@ -30,7 +30,6 @@ var (
 	output string
 )
 
-// initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Generate new grafana dashboard",
