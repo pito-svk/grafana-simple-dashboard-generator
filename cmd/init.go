@@ -39,7 +39,11 @@ var initCmd = &cobra.Command{
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if output != "console" && output != "file" {
-			return fmt.Errorf("invalid value for output. Allowed values are: [\"console\", \"file\"]")
+			return fmt.Errorf("invalid value for output. Allowed values: [\"console\", \"file\"]")
+		}
+
+		if mode != "basic" {
+			return fmt.Errorf("invalid value for mode. Allowed values: [\"basic\"]")
 		}
 
 		return nil
