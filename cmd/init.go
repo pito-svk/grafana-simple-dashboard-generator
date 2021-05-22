@@ -24,7 +24,7 @@ import (
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "This command generates grafana dashboard",
+	Short: "Generate new grafana dashboard",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("init called")
 	},
