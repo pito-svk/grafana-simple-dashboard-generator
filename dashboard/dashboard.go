@@ -21,12 +21,16 @@ THE SOFTWARE.
 */
 package dashboard
 
+type GrafanaDashboardParams struct {
+	Title string
+}
+
 type GrafanaDashboardConfig struct {
 	Id    *string `json:"id"`
 	Uid   *string `json:"uid"`
 	Title *string `json:"title"`
 }
 
-func GenerateDashboard() interface{} {
-	return &GrafanaDashboardConfig{Id: nil}
+func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
+	return &GrafanaDashboardConfig{Id: nil, Title: &params.Title}
 }

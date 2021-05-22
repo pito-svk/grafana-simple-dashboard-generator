@@ -52,7 +52,9 @@ var initCmd = &cobra.Command{
 			return fmt.Errorf("filepath is required when output is \"file\"")
 		}
 
-		dashboard := dashboard.GenerateDashboard()
+		dashboardParams := dashboard.GrafanaDashboardParams{Title: title}
+
+		dashboard := dashboard.GenerateDashboard(&dashboardParams)
 		jsonRes, _ := json.MarshalIndent(dashboard, "", "	")
 
 		fmt.Println(string(jsonRes))
@@ -67,5 +69,5 @@ func init() {
 	initCmd.Flags().StringVarP(&mode, "mode", "m", "basic", "dashboard mode")
 	initCmd.Flags().StringVarP(&output, "output", "o", "console", "specify output mode")
 	initCmd.Flags().StringVarP(&filepath, "filepath", "f", "", "specify a filepath to generate dashboards")
-	initCmd.Flags().StringVar(&filepath, "title", "Server monitoring", "specify a title for dashboard")
+	initCmd.Flags().StringVarP(&title, "title", "t", "Server monitoring", "specify a title for dashboard")
 }
