@@ -36,8 +36,18 @@ type GrafanaDashboardConfigTimepicker struct {
 	TimeOptions      []string `json:"time_options"`
 }
 
+type GrafanaDashboardConfigTemplatingListItemCurrent struct {
+	Text  string `json:"text"`
+	Value string `json:"value"`
+}
+
+type GrafanaDashboardConfigTemplatingListItem struct {
+	Current *GrafanaDashboardConfigTemplatingListItemCurrent `json:"current"`
+	Name    string                                           `json:"name"`
+}
+
 type GrafanaDashboardConfigTemplating struct {
-	List []string `json:"list"`
+	List []GrafanaDashboardConfigTemplatingListItem `json:"list"`
 }
 
 type GrafanaDashboardConfig struct {
@@ -92,7 +102,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				"7d",
 				"30d"},
 		},
-		Templating:    &GrafanaDashboardConfigTemplating{List: []string{}},
+		Templating:    &GrafanaDashboardConfigTemplating{List: []GrafanaDashboardConfigTemplatingListItem{}},
 		Refresh:       "5s",
 		SchemaVersion: 1,
 		Version:       1,
