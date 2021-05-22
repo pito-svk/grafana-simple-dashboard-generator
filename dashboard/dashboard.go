@@ -39,20 +39,21 @@ type GrafanaDashboardConfigTimepicker struct {
 type GrafanaDashboardConfig struct {
 	Id           *string                           `json:"id"`
 	Uid          *string                           `json:"uid"`
-	Title        *string                           `json:"title"`
-	Style        *string                           `json:"style"`
+	Title        string                            `json:"title"`
+	Style        string                            `json:"style"`
 	Timezone     string                            `json:"timezone"`
 	Editable     bool                              `json:"editable"`
 	GraphTooltip int                               `json:"graphTooltip"`
 	Time         *GrafanaDashboardConfigTime       `json:"time"`
 	Timepicker   *GrafanaDashboardConfigTimepicker `json:"timepicker"`
+	Refresh      string                            `json:"refresh"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 	return &GrafanaDashboardConfig{
 		Id:           nil,
-		Title:        &params.Title,
-		Style:        &params.Style,
+		Title:        params.Title,
+		Style:        params.Style,
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
@@ -83,5 +84,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				"7d",
 				"30d"},
 		},
+		Refresh: "5s",
 	}
 }
