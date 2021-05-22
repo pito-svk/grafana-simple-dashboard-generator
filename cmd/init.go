@@ -28,8 +28,9 @@ import (
 )
 
 var (
-	mode   string
-	output string
+	mode     string
+	output   string
+	filepath string
 )
 
 var initCmd = &cobra.Command{
@@ -46,6 +47,10 @@ var initCmd = &cobra.Command{
 			return fmt.Errorf("invalid value for mode. Allowed values: [\"basic\"]")
 		}
 
+		if output == "file" && filepath == "" {
+			return fmt.Errorf("filepath is required when output is \"file\"")
+		}
+
 		return nil
 	},
 }
@@ -55,4 +60,5 @@ func init() {
 
 	initCmd.Flags().StringVarP(&mode, "mode", "m", "basic", "dashboard mode")
 	initCmd.Flags().StringVarP(&output, "output", "o", "console", "specify output mode")
+	initCmd.Flags().StringVarP(&filepath, "filepath", "f", "", "specify a filepath to generate dashboards")
 }
