@@ -48,6 +48,7 @@ type GrafanaDashboardConfig struct {
 	Timepicker    *GrafanaDashboardConfigTimepicker `json:"timepicker"`
 	Refresh       string                            `json:"refresh"`
 	SchemaVersion int                               `json:"schemaVersion"`
+	Version       int                               `json:"version"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
@@ -87,5 +88,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		Refresh:       "5s",
 		SchemaVersion: 1,
+		Version:       1,
 	}
 }
