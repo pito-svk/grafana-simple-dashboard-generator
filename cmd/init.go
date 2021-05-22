@@ -27,16 +27,21 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	mode     string
+)
+
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Generate new grafana dashboard",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("init called")
+		fmt.Println(mode)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(initCmd)
-	initCmd.Flags().String("mode", "basic", "dashboard mode")
+	initCmd.Flags().StringVarP(&mode, "mode", "m", "basic", "dashboard mode")
 }
