@@ -49,6 +49,10 @@ var initCmd = &cobra.Command{
 			return fmt.Errorf("invalid value for mode. Allowed values: [\"basic\"]")
 		}
 
+		if style != "light" && style != "dark" {
+			return fmt.Errorf("invalid value for style. Allowed values: [\"light\", \"dark\"]")
+		}
+
 		if output == "file" && filepath == "" {
 			return fmt.Errorf("filepath is required when output is \"file\"")
 		}
