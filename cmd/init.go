@@ -54,7 +54,6 @@ var initCmd = &cobra.Command{
 		dashboard := dashboard.GenerateDashboard()
 		jsonRes, _ := json.Marshal(dashboard)
 
-		fmt.Println("...")
 		fmt.Println(string(jsonRes))
 
 		return nil
