@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "pito-svk/grafana-simple-dashboard-generator/cmd"
+import "github.com/pito-svk/grafana-simple-dashboard-generator/cmd"
 
 func main() {
 	cmd.Execute()

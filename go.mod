@@ -1,4 +1,4 @@
-module pito-svk/grafana-simple-dashboard-generator
+module github.com/pito-svk/grafana-simple-dashboard-generator
 
 go 1.16
 
