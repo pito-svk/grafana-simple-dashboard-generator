@@ -53,7 +53,7 @@ var initCmd = &cobra.Command{
 			return fmt.Errorf("filepath is required when output is \"file\"")
 		}
 
-		dashboardParams := dashboard.GrafanaDashboardParams{Title: title}
+		dashboardParams := dashboard.GrafanaDashboardParams{Title: title, Style: style}
 
 		dashboard := dashboard.GenerateDashboard(&dashboardParams)
 		jsonRes, _ := json.MarshalIndent(dashboard, "", "	")
