@@ -86,8 +86,8 @@ type GrafanaDashboardConfigInput struct {
 }
 
 type GrafanaDashboardConfig struct {
-	Id            *string                          `json:"id,omitempty"`
-	Uid           *string                          `json:"uid,omitempty"`
+	Id            string                          `json:"id,omitempty"`
+	Uid           string                          `json:"uid,omitempty"`
 	Title         string                           `json:"title"`
 	Style         string                           `json:"style"`
 	Timezone      string                           `json:"timezone"`
