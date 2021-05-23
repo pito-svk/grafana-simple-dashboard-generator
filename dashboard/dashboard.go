@@ -127,6 +127,15 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Refresh:       "5s",
 		SchemaVersion: 1,
 		Version:       1,
-		Panels:        []GrafanaDashboardConfigPanel{},
+		Panels: []GrafanaDashboardConfigPanel{
+			{
+				GridPos: GrafanaDashboardConfigPanelsGridPos{
+					H: 1,
+					W: 24,
+					X: 0,
+					Y: 0,
+				},
+			},
+		},
 	}
 }
