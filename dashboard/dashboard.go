@@ -52,7 +52,7 @@ type GrafanaDashboardConfigTemplatingListItem struct {
 	Name    string                                           `json:"name"`
 	Query   string                                           `json:"query"`
 	Type    string                                           `json:"type"`
-	Options *GrafanaDashboardConfigTemplatingListItemOptions `json:"options"`
+	Options GrafanaDashboardConfigTemplatingListItemOptions `json:"options"`
 }
 
 type GrafanaDashboardConfigTemplating struct {
