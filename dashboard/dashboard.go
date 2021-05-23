@@ -74,6 +74,7 @@ type GrafanaDashboardConfigPanel struct {
 	Collapsed  bool                                `json:"collapsed,omitempty"`
 	Colors     []string                            `json:"colors,omitempty"`
 	DataSource string                              `json:"datasource,omitempty"`
+	Format     string                              `json:"format,omitempty"`
 }
 
 type GrafanaDashboardConfigInput struct {
@@ -170,6 +171,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				Type:       "singlestat",
 				Colors:     []string{greenColor, orangeColor, redColor},
 				DataSource: "${DS_PROMETHEUS}",
+				Format:     "percentunit",
 			},
 		},
 		Annotations: []string{},
