@@ -88,20 +88,27 @@ type GrafanaDashboardConfigPanelSparkline struct {
 	Show      bool   `json:"show"`
 }
 
+type GrafanaDashboardConfigPanelRangeMap struct {
+	From string `json:"from,omitempty"`
+	To   string `json:"to,omitempty"`
+	Text string `json:"text,omitempty"`
+}
+
 type GrafanaDashboardConfigPanel struct {
-	Id            int                                  `json:"id,omitempty"`
-	GridPos       GrafanaDashboardConfigPanelGridPos   `json:"gridPos,omitempty"`
-	Title         string                               `json:"title,omitempty"`
-	Type          string                               `json:"type,omitempty"`
-	Collapsed     bool                                 `json:"collapsed,omitempty"`
-	Colors        []string                             `json:"colors,omitempty"`
-	DataSource    string                               `json:"datasource,omitempty"`
-	Format        string                               `json:"format,omitempty"`
-	Gauge         GrafanaDashboardConfigPanelGauge     `json:"gauge,omitempty"`
-	MaxDataPoints int                                  `json:"maxDataPoints,omitempty"`
-	Targets       []GrafanaDashboardConfigPanelTarget  `json:"targets,omitempty"`
-	Thresholds    string                               `json:"thresholds,omitempty"`
-	Sparkline     GrafanaDashboardConfigPanelSparkline `json:"sparkline,omitempty"`
+	Id            int                                   `json:"id,omitempty"`
+	GridPos       GrafanaDashboardConfigPanelGridPos    `json:"gridPos,omitempty"`
+	Title         string                                `json:"title,omitempty"`
+	Type          string                                `json:"type,omitempty"`
+	Collapsed     bool                                  `json:"collapsed,omitempty"`
+	Colors        []string                              `json:"colors,omitempty"`
+	DataSource    string                                `json:"datasource,omitempty"`
+	Format        string                                `json:"format,omitempty"`
+	Gauge         GrafanaDashboardConfigPanelGauge      `json:"gauge,omitempty"`
+	MaxDataPoints int                                   `json:"maxDataPoints,omitempty"`
+	Targets       []GrafanaDashboardConfigPanelTarget   `json:"targets,omitempty"`
+	Thresholds    string                                `json:"thresholds,omitempty"`
+	Sparkline     GrafanaDashboardConfigPanelSparkline  `json:"sparkline,omitempty"`
+	RangeMaps     []GrafanaDashboardConfigPanelRangeMap `json:"rangeMaps,omitempty"`
 }
 
 type GrafanaDashboardConfigInput struct {
@@ -241,6 +248,13 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 					Full:      false,
 					LineColor: whiteColor,
 					Show:      false,
+				},
+				RangeMaps: []GrafanaDashboardConfigPanelRangeMap{
+					{
+						From: "null",
+						Text: "N/A",
+						To:   "null",
+					},
 				},
 			},
 		},
