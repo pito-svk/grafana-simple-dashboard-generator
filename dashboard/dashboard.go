@@ -27,8 +27,8 @@ type GrafanaDashboardParams struct {
 }
 
 type GrafanaDashboardConfigTime struct {
-	From string `json:"from"`
-	To   string `json:"to"`
+	From string `json:"from,omitempty"`
+	To   string `json:"to,omitempty"`
 }
 
 type GrafanaDashboardConfigTimepicker struct {
@@ -37,33 +37,33 @@ type GrafanaDashboardConfigTimepicker struct {
 }
 
 type GrafanaDashboardConfigTemplatingListItemCurrent struct {
-	Text  string `json:"text"`
-	Value string `json:"value"`
+	Text  string `json:"text,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type GrafanaDashboardConfigTemplatingListItemOptions struct {
-	Selected bool   `json:"selected"`
-	Text     string `json:"text"`
-	Value    string `json:"value"`
+	Selected bool   `json:"selected,omitempty"`
+	Text     string `json:"text,omitempty"`
+	Value    string `json:"value,omitempty"`
 }
 
 type GrafanaDashboardConfigTemplatingListItem struct {
-	Current *GrafanaDashboardConfigTemplatingListItemCurrent `json:"current"`
-	Name    string                                           `json:"name"`
-	Query   string                                           `json:"query"`
-	Type    string                                           `json:"type"`
-	Options GrafanaDashboardConfigTemplatingListItemOptions  `json:"options"`
+	Current GrafanaDashboardConfigTemplatingListItemCurrent   `json:"current"`
+	Name    string                                            `json:"name"`
+	Query   string                                            `json:"query"`
+	Type    string                                            `json:"type"`
+	Options []GrafanaDashboardConfigTemplatingListItemOptions `json:"options"`
 }
 
 type GrafanaDashboardConfigTemplating struct {
-	List []GrafanaDashboardConfigTemplatingListItem `json:"list"`
+	List []GrafanaDashboardConfigTemplatingListItem `json:"list,omitempty"`
 }
 
 type GrafanaDashboardConfigPanelGridPos struct {
-	H int `json:"h"`
-	W int `json:"w"`
-	X int `json:"x"`
-	Y int `json:"y"`
+	H int `json:"h,omitempty"`
+	W int `json:"w,omitempty"`
+	X int `json:"x,omitempty"`
+	Y int `json:"y,omitempty"`
 }
 
 type GrafanaDashboardConfigPanelGauge struct {
@@ -161,7 +161,26 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				"7d",
 				"30d"},
 		},
-		Templating:    GrafanaDashboardConfigTemplating{List: []GrafanaDashboardConfigTemplatingListItem{}},
+		Templating: GrafanaDashboardConfigTemplating{
+			List: []GrafanaDashboardConfigTemplatingListItem{
+				{
+					Current: GrafanaDashboardConfigTemplatingListItemCurrent{
+						Text:  ".*",
+						Value: ".*",
+					},
+					Name: "node",
+					Options: []GrafanaDashboardConfigTemplatingListItemOptions{
+						{
+							Selected: true,
+							Text:     ".*",
+							Value:    ".*",
+						},
+					},
+					Query: ".*",
+					Type:  "constant",
+				},
+			},
+		},
 		Refresh:       "5s",
 		SchemaVersion: 1,
 		Version:       1,
