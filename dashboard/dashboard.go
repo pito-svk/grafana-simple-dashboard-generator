@@ -66,6 +66,14 @@ type GrafanaDashboardConfigPanelsGridPos struct {
 	Y int `json:"y"`
 }
 
+type GrafanaDashboardConfigPanelsGauge struct {
+	MaxValue         int  `json:"maxValue,omitempty"`
+	MinValue         int  `json:"minValue,omitempty"`
+	Show             bool `json:"show,omitempty"`
+	ThresholdLabels  bool `json:"thresholdLabels,omitempty"`
+	ThresholdMarkers bool `json:"thresholdMarkers,omitempty"`
+}
+
 type GrafanaDashboardConfigPanel struct {
 	Id         int                                 `json:"id"`
 	GridPos    GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
@@ -75,6 +83,7 @@ type GrafanaDashboardConfigPanel struct {
 	Colors     []string                            `json:"colors,omitempty"`
 	DataSource string                              `json:"datasource,omitempty"`
 	Format     string                              `json:"format,omitempty"`
+	Gauge      GrafanaDashboardConfigPanelsGauge   `json:"gauge,omitempty"`
 }
 
 type GrafanaDashboardConfigInput struct {
@@ -172,6 +181,12 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				Colors:     []string{greenColor, orangeColor, redColor},
 				DataSource: "${DS_PROMETHEUS}",
 				Format:     "percentunit",
+				Gauge: GrafanaDashboardConfigPanelsGauge{
+					MaxValue:         100,
+					MinValue:         0,
+					Show:             true,
+					ThresholdMarkers: true,
+				},
 			},
 		},
 		Annotations: []string{},
