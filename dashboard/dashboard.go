@@ -105,6 +105,10 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
+	greenColor := "#299c46"
+	redColor := "#d44a3a"
+	orangeColor := "rgba(237, 129, 40, 0.89)"
+
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
 		Style:        params.Style,
@@ -164,7 +168,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				},
 				Title:      "Cluster Pod Usage",
 				Type:       "singlestat",
-				Colors:     []string{"#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"},
+				Colors:     []string{greenColor, orangeColor, redColor},
 				DataSource: "${DS_PROMETHEUS}",
 			},
 		},
