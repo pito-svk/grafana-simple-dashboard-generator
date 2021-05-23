@@ -59,21 +59,33 @@ type GrafanaDashboardConfigTemplating struct {
 	List []GrafanaDashboardConfigTemplatingListItem `json:"list"`
 }
 
+type GrafanaDashboardConfigPanelsGridPos struct {
+	H int `json:"h"`
+	W int `json:"w"`
+	X int `json:"x"`
+	Y int `json:"y"`
+}
+
+type GrafanaDashboardConfigPanel struct {
+	GridPos GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
+}
+
 type GrafanaDashboardConfig struct {
-	Id           *string                           `json:"id"`
-	Uid          *string                           `json:"uid"`
-	Title        string                            `json:"title"`
-	Style        string                            `json:"style"`
-	Timezone     string                            `json:"timezone"`
-	Editable     bool                              `json:"editable"`
-	GraphTooltip int                               `json:"graphTooltip"`
-	Time         *GrafanaDashboardConfigTime       `json:"time"`
-	Timepicker   *GrafanaDashboardConfigTimepicker `json:"timepicker"`
-	Templating   *GrafanaDashboardConfigTemplating `json:"templating"`
+	Id           *string                          `json:"id"`
+	Uid          *string                          `json:"uid"`
+	Title        string                           `json:"title"`
+	Style        string                           `json:"style"`
+	Timezone     string                           `json:"timezone"`
+	Editable     bool                             `json:"editable"`
+	GraphTooltip int                              `json:"graphTooltip"`
+	Time         GrafanaDashboardConfigTime       `json:"time"`
+	Timepicker   GrafanaDashboardConfigTimepicker `json:"timepicker"`
+	Templating   GrafanaDashboardConfigTemplating `json:"templating"`
 	// Annotations
-	Refresh       string `json:"refresh"`
-	SchemaVersion int    `json:"schemaVersion"`
-	Version       int    `json:"version"`
+	Refresh       string                        `json:"refresh"`
+	SchemaVersion int                           `json:"schemaVersion"`
+	Version       int                           `json:"version"`
+	Panels        []GrafanaDashboardConfigPanel `json:"panels"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
@@ -84,11 +96,11 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
-		Time: &GrafanaDashboardConfigTime{
+		Time: GrafanaDashboardConfigTime{
 			From: "now-6h",
 			To:   "now",
 		},
-		Timepicker: &GrafanaDashboardConfigTimepicker{
+		Timepicker: GrafanaDashboardConfigTimepicker{
 			RefreshIntervals: []string{
 				"5s",
 				"10s",
@@ -111,9 +123,10 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				"7d",
 				"30d"},
 		},
-		Templating:    &GrafanaDashboardConfigTemplating{List: []GrafanaDashboardConfigTemplatingListItem{}},
+		Templating:    GrafanaDashboardConfigTemplating{List: []GrafanaDashboardConfigTemplatingListItem{}},
 		Refresh:       "5s",
 		SchemaVersion: 1,
 		Version:       1,
+		Panels:        []GrafanaDashboardConfigPanel{},
 	}
 }
