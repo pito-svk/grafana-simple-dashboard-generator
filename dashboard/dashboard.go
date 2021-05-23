@@ -52,7 +52,7 @@ type GrafanaDashboardConfigTemplatingListItem struct {
 	Name    string                                           `json:"name"`
 	Query   string                                           `json:"query"`
 	Type    string                                           `json:"type"`
-	Options GrafanaDashboardConfigTemplatingListItemOptions `json:"options"`
+	Options GrafanaDashboardConfigTemplatingListItemOptions  `json:"options"`
 }
 
 type GrafanaDashboardConfigTemplating struct {
@@ -71,7 +71,7 @@ type GrafanaDashboardConfigPanel struct {
 	GridPos    GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
 	Title      string                              `json:"title"`
 	Type       string                              `json:"type"`
-	Collapsed  *bool                               `json:"collapsed,omitempty"`
+	Collapsed  bool                                `json:"collapsed,omitempty"`
 	Colors     []string                            `json:"colors,omitempty"`
 	DataSource string                              `json:"datasource,omitempty"`
 }
@@ -86,8 +86,8 @@ type GrafanaDashboardConfigInput struct {
 }
 
 type GrafanaDashboardConfig struct {
-	Id            string                          `json:"id,omitempty"`
-	Uid           string                          `json:"uid,omitempty"`
+	Id            string                           `json:"id,omitempty"`
+	Uid           string                           `json:"uid,omitempty"`
 	Title         string                           `json:"title"`
 	Style         string                           `json:"style"`
 	Timezone      string                           `json:"timezone"`
@@ -105,8 +105,6 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
-	falseCollapsed := false
-
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
 		Style:        params.Style,
@@ -153,9 +151,8 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 					X: 0,
 					Y: 0,
 				},
-				Title:     "Cluster Health",
-				Type:      "row",
-				Collapsed: &falseCollapsed,
+				Title: "Cluster Health",
+				Type:  "row",
 			},
 			{
 				Id: 2,
