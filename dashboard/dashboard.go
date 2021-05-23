@@ -67,18 +67,27 @@ type GrafanaDashboardConfigPanelsGridPos struct {
 }
 
 type GrafanaDashboardConfigPanel struct {
-	Id        int                                 `json:"id"`
-	GridPos   GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
-	Title     string                              `json:"title"`
-	Type      string                              `json:"type"`
-	Collapsed *bool                               `json:"collapsed,omitempty"`
-	Colors    []string                            `json:"colors,omitempty"`
-	DataSource string `json:"datasource,omitempty"`
+	Id         int                                 `json:"id"`
+	GridPos    GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
+	Title      string                              `json:"title"`
+	Type       string                              `json:"type"`
+	Collapsed  *bool                               `json:"collapsed,omitempty"`
+	Colors     []string                            `json:"colors,omitempty"`
+	DataSource string                              `json:"datasource,omitempty"`
+}
+
+type GrafanaDashboardConfigInput struct {
+	Name        string `json:"name,omitempty"`
+	Label       string `json:"label,omitempty"`
+	Description string `json:"description,omitempty"`
+	Type        string `json:"type,omitempty"`
+	PluginId    string `json:"pluginId,omitempty"`
+	PluginName  string `json:"pluginName,omitempty"`
 }
 
 type GrafanaDashboardConfig struct {
-	Id            *string                          `json:"id"`
-	Uid           *string                          `json:"uid"`
+	Id            *string                          `json:"id,omitempty"`
+	Uid           *string                          `json:"uid,omitempty"`
 	Title         string                           `json:"title"`
 	Style         string                           `json:"style"`
 	Timezone      string                           `json:"timezone"`
@@ -92,13 +101,13 @@ type GrafanaDashboardConfig struct {
 	Version       int                              `json:"version"`
 	Panels        []GrafanaDashboardConfigPanel    `json:"panels"`
 	Annotations   []string                         `json:"annotations"`
+	Inputs        []GrafanaDashboardConfigInput    `json:"__inputs,omitempty"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 	falseCollapsed := false
 
 	return &GrafanaDashboardConfig{
-		Id:           nil,
 		Title:        params.Title,
 		Style:        params.Style,
 		Timezone:     "browser",
@@ -150,18 +159,27 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			},
 			{
 				Id: 2,
-				GridPos:  GrafanaDashboardConfigPanelsGridPos{
+				GridPos: GrafanaDashboardConfigPanelsGridPos{
 					H: 6,
 					W: 4,
 					X: 0,
 					Y: 1,
 				},
-				Title: "Cluster Pod Usage",
-				Type: "singlestat",
-				Colors:    []string{"#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"},
+				Title:      "Cluster Pod Usage",
+				Type:       "singlestat",
+				Colors:     []string{"#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"},
 				DataSource: "${DS_PROMETHEUS}",
 			},
 		},
 		Annotations: []string{},
+		Inputs: []GrafanaDashboardConfigInput{
+			{
+				Name:       "DS_PROMETHEUS",
+				Label:      "prometheus",
+				Type:       "datasource",
+				PluginId:   "prometheus",
+				PluginName: "Prometheus",
+			},
+		},
 	}
 }
