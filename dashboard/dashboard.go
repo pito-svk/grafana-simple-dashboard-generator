@@ -59,14 +59,14 @@ type GrafanaDashboardConfigTemplating struct {
 	List []GrafanaDashboardConfigTemplatingListItem `json:"list"`
 }
 
-type GrafanaDashboardConfigPanelsGridPos struct {
+type GrafanaDashboardConfigPanelGridPos struct {
 	H int `json:"h"`
 	W int `json:"w"`
 	X int `json:"x"`
 	Y int `json:"y"`
 }
 
-type GrafanaDashboardConfigPanelsGauge struct {
+type GrafanaDashboardConfigPanelGauge struct {
 	MaxValue         int  `json:"maxValue,omitempty"`
 	MinValue         int  `json:"minValue,omitempty"`
 	Show             bool `json:"show,omitempty"`
@@ -74,17 +74,25 @@ type GrafanaDashboardConfigPanelsGauge struct {
 	ThresholdMarkers bool `json:"thresholdMarkers,omitempty"`
 }
 
+type GrafanaDashboardConfigPanelTarget struct {
+	Expr           string `json:"expr,omitempty"`
+	Format         string `json:"format,omitempty"`
+	IntervalFactor int    `json:"intervalFactor,omitempty"`
+	RefId          string `json:"refId,omitempty"`
+}
+
 type GrafanaDashboardConfigPanel struct {
 	Id            int                                 `json:"id"`
-	GridPos       GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
+	GridPos       GrafanaDashboardConfigPanelGridPos  `json:"gridPos"`
 	Title         string                              `json:"title"`
 	Type          string                              `json:"type"`
 	Collapsed     bool                                `json:"collapsed,omitempty"`
 	Colors        []string                            `json:"colors,omitempty"`
 	DataSource    string                              `json:"datasource,omitempty"`
 	Format        string                              `json:"format,omitempty"`
-	Gauge         GrafanaDashboardConfigPanelsGauge   `json:"gauge,omitempty"`
+	Gauge         GrafanaDashboardConfigPanelGauge    `json:"gauge,omitempty"`
 	MaxDataPoints int                                 `json:"maxDataPoints,omitempty"`
+	Targets       []GrafanaDashboardConfigPanelTarget `json:"targets,omitempty"`
 }
 
 type GrafanaDashboardConfigInput struct {
@@ -160,7 +168,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Panels: []GrafanaDashboardConfigPanel{
 			{
 				Id: 1,
-				GridPos: GrafanaDashboardConfigPanelsGridPos{
+				GridPos: GrafanaDashboardConfigPanelGridPos{
 					H: 1,
 					W: 24,
 					X: 0,
@@ -171,7 +179,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			},
 			{
 				Id: 2,
-				GridPos: GrafanaDashboardConfigPanelsGridPos{
+				GridPos: GrafanaDashboardConfigPanelGridPos{
 					H: 6,
 					W: 4,
 					X: 0,
@@ -182,13 +190,21 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				Colors:     []string{greenColor, orangeColor, redColor},
 				DataSource: "${DS_PROMETHEUS}",
 				Format:     "percentunit",
-				Gauge: GrafanaDashboardConfigPanelsGauge{
+				Gauge: GrafanaDashboardConfigPanelGauge{
 					MaxValue:         100,
 					MinValue:         0,
 					Show:             true,
 					ThresholdMarkers: true,
 				},
 				MaxDataPoints: 100,
+				Targets: []GrafanaDashboardConfigPanelTarget{
+					{
+						Expr:           "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable_pods{node=~\".*\"})",
+						Format:         "time_series",
+						IntervalFactor: 1,
+						RefId:          "A",
+					},
+				},
 			},
 		},
 		Annotations: []string{},
