@@ -68,6 +68,7 @@ type GrafanaDashboardConfigPanelsGridPos struct {
 
 type GrafanaDashboardConfigPanel struct {
 	GridPos GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
+	Rest_   map[string]interface{}              `json:"-"`
 }
 
 type GrafanaDashboardConfig struct {
