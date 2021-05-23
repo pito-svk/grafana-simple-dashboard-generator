@@ -82,10 +82,10 @@ type GrafanaDashboardConfigPanelTarget struct {
 }
 
 type GrafanaDashboardConfigPanel struct {
-	Id            int                                 `json:"id"`
-	GridPos       GrafanaDashboardConfigPanelGridPos  `json:"gridPos"`
-	Title         string                              `json:"title"`
-	Type          string                              `json:"type"`
+	Id            int                                 `json:"id,omitempty"`
+	GridPos       GrafanaDashboardConfigPanelGridPos  `json:"gridPos,omitempty"`
+	Title         string                              `json:"title,omitempty"`
+	Type          string                              `json:"type,omitempty"`
 	Collapsed     bool                                `json:"collapsed,omitempty"`
 	Colors        []string                            `json:"colors,omitempty"`
 	DataSource    string                              `json:"datasource,omitempty"`
@@ -93,6 +93,7 @@ type GrafanaDashboardConfigPanel struct {
 	Gauge         GrafanaDashboardConfigPanelGauge    `json:"gauge,omitempty"`
 	MaxDataPoints int                                 `json:"maxDataPoints,omitempty"`
 	Targets       []GrafanaDashboardConfigPanelTarget `json:"targets,omitempty"`
+	Thresholds    string                              `json:"thresholds,omitempty"`
 }
 
 type GrafanaDashboardConfigInput struct {
@@ -224,6 +225,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 						RefId:          "A",
 					},
 				},
+				Thresholds: "80,90",
 			},
 		},
 		Annotations: []string{},
