@@ -223,7 +223,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 					Y: 1,
 				},
 				Title:      "Cluster Pod Usage",
-				Type:       "singlestat",
+				Type:       "gauge",
 				Colors:     []string{greenColor, orangeColor, redColor},
 				DataSource: "${DS_PROMETHEUS}",
 				Format:     "percentunit",
