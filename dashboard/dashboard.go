@@ -89,6 +89,7 @@ type GrafanaDashboardConfig struct {
 	SchemaVersion int                              `json:"schemaVersion"`
 	Version       int                              `json:"version"`
 	Panels        []GrafanaDashboardConfigPanel    `json:"panels"`
+	Annotations   []string                         `json:"annotations"`
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
@@ -146,5 +147,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				Collapsed: &falseCollapsed,
 			},
 		},
+		Annotations: []string{},
 	}
 }
