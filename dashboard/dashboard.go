@@ -67,8 +67,11 @@ type GrafanaDashboardConfigPanelsGridPos struct {
 }
 
 type GrafanaDashboardConfigPanel struct {
-	GridPos GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
-	Rest_   map[string]interface{}              `json:"-"`
+	Id        int                                 `json:"id"`
+	GridPos   GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
+	Title     string                              `json:"title"`
+	Type      string                              `json:"type"`
+	Collapsed *bool                               `json:"collapsed"`
 }
 
 type GrafanaDashboardConfig struct {
@@ -89,6 +92,8 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
+	falseCollapsed := false
+
 	return &GrafanaDashboardConfig{
 		Id:           nil,
 		Title:        params.Title,
@@ -129,12 +134,16 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Version:       1,
 		Panels: []GrafanaDashboardConfigPanel{
 			{
+				Id: 1,
 				GridPos: GrafanaDashboardConfigPanelsGridPos{
 					H: 1,
 					W: 24,
 					X: 0,
 					Y: 0,
 				},
+				Title:     "Cluster Health",
+				Type:      "row",
+				Collapsed: &falseCollapsed,
 			},
 		},
 	}
