@@ -71,7 +71,8 @@ type GrafanaDashboardConfigPanel struct {
 	GridPos   GrafanaDashboardConfigPanelsGridPos `json:"gridPos"`
 	Title     string                              `json:"title"`
 	Type      string                              `json:"type"`
-	Collapsed *bool                               `json:"collapsed"`
+	Collapsed *bool                               `json:"collapsed,omitempty"`
+	Colors    []string                            `json:"colors,omitempty"`
 }
 
 type GrafanaDashboardConfig struct {
@@ -145,6 +146,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				Title:     "Cluster Health",
 				Type:      "row",
 				Collapsed: &falseCollapsed,
+				Colors:    []string{"#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"},
 			},
 		},
 		Annotations: []string{},
