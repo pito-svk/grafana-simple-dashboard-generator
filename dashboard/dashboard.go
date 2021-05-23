@@ -41,9 +41,18 @@ type GrafanaDashboardConfigTemplatingListItemCurrent struct {
 	Value string `json:"value"`
 }
 
+type GrafanaDashboardConfigTemplatingListItemOptions struct {
+	Selected bool   `json:"selected"`
+	Text     string `json:"text"`
+	Value    string `json:"value"`
+}
+
 type GrafanaDashboardConfigTemplatingListItem struct {
 	Current *GrafanaDashboardConfigTemplatingListItemCurrent `json:"current"`
 	Name    string                                           `json:"name"`
+	Query   string                                           `json:"query"`
+	Type    string                                           `json:"type"`
+	Options *GrafanaDashboardConfigTemplatingListItemOptions `json:"options"`
 }
 
 type GrafanaDashboardConfigTemplating struct {
