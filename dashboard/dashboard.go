@@ -73,6 +73,7 @@ type GrafanaDashboardConfigPanel struct {
 	Type      string                              `json:"type"`
 	Collapsed *bool                               `json:"collapsed,omitempty"`
 	Colors    []string                            `json:"colors,omitempty"`
+	DataSource string `json:"datasource,omitempty"`
 }
 
 type GrafanaDashboardConfig struct {
@@ -146,7 +147,19 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 				Title:     "Cluster Health",
 				Type:      "row",
 				Collapsed: &falseCollapsed,
+			},
+			{
+				Id: 2,
+				GridPos:  GrafanaDashboardConfigPanelsGridPos{
+					H: 6,
+					W: 4,
+					X: 0,
+					Y: 1,
+				},
+				Title: "Cluster Pod Usage",
+				Type: "singlestat",
 				Colors:    []string{"#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"},
+				DataSource: "${DS_PROMETHEUS}",
 			},
 		},
 		Annotations: []string{},
