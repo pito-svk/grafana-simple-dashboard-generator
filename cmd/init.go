@@ -62,7 +62,11 @@ var initCmd = &cobra.Command{
 		dashboard := dashboard.GenerateDashboard(&dashboardParams)
 		jsonRes, _ := json.MarshalIndent(dashboard, "", "	")
 
-		fmt.Println(string(jsonRes))
+		if output == "console" {
+			fmt.Println(string(jsonRes))
+		} else if output == "file" {
+			fmt.Println("Not implemented yet")
+		}
 
 		return nil
 	},

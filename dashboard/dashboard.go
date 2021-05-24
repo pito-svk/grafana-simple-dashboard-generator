@@ -126,7 +126,7 @@ type GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds struct {
 type GrafanaDashboardConfigPanelFieldConfigDefaults struct {
 	Color      GrafanaDashboardConfigPanelFieldConfigDefaultsColor      `json:"color,omitempty"`
 	Thresholds GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds `json:"thresholds,omitempty"`
-	Unit string `json:"unit,omitempty"`
+	Unit       string                                                   `json:"unit,omitempty"`
 }
 
 type GrafanaDashboardConfigPanelFieldConfig struct {
