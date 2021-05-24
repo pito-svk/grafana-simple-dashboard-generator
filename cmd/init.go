@@ -35,7 +35,6 @@ var (
 	output   string
 	filepath string
 	title    string
-	style    string
 )
 
 var initCmd = &cobra.Command{
@@ -50,15 +49,11 @@ var initCmd = &cobra.Command{
 			return fmt.Errorf("invalid value for mode. Allowed values: [\"basic\"]")
 		}
 
-		if style != "light" && style != "dark" {
-			return fmt.Errorf("invalid value for style. Allowed values: [\"light\", \"dark\"]")
-		}
-
 		if output == "file" && filepath == "" {
 			return fmt.Errorf("filepath is required when output is \"file\"")
 		}
 
-		dashboardParams := dashboard.GrafanaDashboardParams{Title: title, Style: style}
+		dashboardParams := dashboard.GrafanaDashboardParams{Title: title}
 
 		dashboard := dashboard.GenerateDashboard(&dashboardParams)
 		jsonRes, _ := json.MarshalIndent(dashboard, "", "	")
@@ -80,5 +75,4 @@ func init() {
 	initCmd.Flags().StringVarP(&output, "output", "o", "console", "specify output mode")
 	initCmd.Flags().StringVarP(&filepath, "filepath", "f", "", "specify a filepath to generate dashboards")
 	initCmd.Flags().StringVarP(&title, "title", "t", "Server monitoring", "specify a title for dashboard")
-	initCmd.Flags().StringVarP(&style, "style", "s", "light", "specify a style for dashboard")
 }

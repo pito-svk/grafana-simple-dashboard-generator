@@ -23,7 +23,6 @@ package dashboard
 
 type GrafanaDashboardParams struct {
 	Title string
-	Style string
 }
 
 type GrafanaDashboardConfigTime struct {
@@ -157,7 +156,6 @@ type GrafanaDashboardConfig struct {
 	Id            string                           `json:"id,omitempty"`
 	Uid           string                           `json:"uid,omitempty"`
 	Title         string                           `json:"title"`
-	Style         string                           `json:"style"`
 	Timezone      string                           `json:"timezone"`
 	Editable      bool                             `json:"editable"`
 	GraphTooltip  int                              `json:"graphTooltip"`
@@ -179,7 +177,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
-		Style:        params.Style,
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
