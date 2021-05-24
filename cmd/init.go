@@ -46,7 +46,7 @@ var initCmd = &cobra.Command{
 		}
 
 		if mode != "basic" {
-			return fmt.Errorf("invalid value for mode. Allowed values: [\"basic\"]")
+			return fmt.Errorf("invalid value for mode. Allowed values: [\"default\"]")
 		}
 
 		if output == "file" && filepath == "" {
@@ -71,7 +71,7 @@ var initCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(initCmd)
 
-	initCmd.Flags().StringVarP(&mode, "mode", "m", "basic", "dashboard mode")
+	initCmd.Flags().StringVarP(&mode, "mode", "m", "default", "dashboard mode")
 	initCmd.Flags().StringVarP(&output, "output", "o", "console", "specify output mode")
 	initCmd.Flags().StringVarP(&filepath, "filepath", "f", "", "specify a filepath to generate dashboards")
 	initCmd.Flags().StringVarP(&title, "title", "t", "Server monitoring", "specify a title for dashboard")
