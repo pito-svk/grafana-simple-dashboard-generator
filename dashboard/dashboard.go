@@ -270,7 +270,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 							Mode: "thresholds",
 						},
 						Thresholds: GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds{
-							Mode: "absolute",
+							Mode: "percentage",
 							Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
 								{
 									Color: greenColor,
