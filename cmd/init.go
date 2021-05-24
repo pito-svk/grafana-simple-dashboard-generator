@@ -24,6 +24,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/pito-svk/grafana-simple-dashboard-generator/dashboard"
 	"github.com/spf13/cobra"
@@ -65,7 +66,7 @@ var initCmd = &cobra.Command{
 		if output == "console" {
 			fmt.Println(string(jsonRes))
 		} else if output == "file" {
-			fmt.Println("Not implemented yet")
+			os.WriteFile(filepath, jsonRes, 0644)
 		}
 
 		return nil
