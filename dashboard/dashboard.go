@@ -107,14 +107,40 @@ type GrafanaDashboardConfigPanelOptions struct {
 	ShowThresholdMarkers bool                                            `json:"showThresholdMarkers"`
 }
 
+type GrafanaDashboardConfigPanelFieldConfigDefaultsColor struct {
+	Mode string `json:"mode,omitempty"`
+}
+
+type GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep struct {
+	Color string `json:"color,omitempty"`
+	Value int    `json:"value,omitempty"`
+}
+
+type GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds struct {
+	Mode  string                                                         `json:"mode,omitempty"`
+	Steps []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep `json:"steps,omitempty"`
+	Max   int                                                            `json:"max,omitempty"`
+	Unit  string                                                         `json:"unit,omitempty"`
+}
+
+type GrafanaDashboardConfigPanelFieldConfigDefaults struct {
+	Color      GrafanaDashboardConfigPanelFieldConfigDefaultsColor      `json:"color,omitempty"`
+	Thresholds GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds `json:"thresholds,omitempty"`
+}
+
+type GrafanaDashboardConfigPanelFieldConfig struct {
+	Defaults GrafanaDashboardConfigPanelFieldConfigDefaults `json:"defaults,omitempty"`
+}
+
 type GrafanaDashboardConfigPanel struct {
-	Id            int                                 `json:"id,omitempty"`
-	GridPos       GrafanaDashboardConfigPanelGridPos  `json:"gridPos,omitempty"`
-	Title         string                              `json:"title,omitempty"`
-	Type          string                              `json:"type,omitempty"`
-	MaxDataPoints int                                 `json:"maxDataPoints,omitempty"`
-	Targets       []GrafanaDashboardConfigPanelTarget `json:"targets,omitempty"`
-	Options       GrafanaDashboardConfigPanelOptions  `json:"options,omitempty"`
+	Id            int                                    `json:"id,omitempty"`
+	GridPos       GrafanaDashboardConfigPanelGridPos     `json:"gridPos,omitempty"`
+	Title         string                                 `json:"title,omitempty"`
+	Type          string                                 `json:"type,omitempty"`
+	MaxDataPoints int                                    `json:"maxDataPoints,omitempty"`
+	Targets       []GrafanaDashboardConfigPanelTarget    `json:"targets,omitempty"`
+	Options       GrafanaDashboardConfigPanelOptions     `json:"options,omitempty"`
+	FieldConfig   GrafanaDashboardConfigPanelFieldConfig `json:"fieldConfig,omitempty"`
 }
 
 type GrafanaDashboardConfigInput struct {
@@ -149,8 +175,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 	greenColor := "#299c46"
 	redColor := "#d44a3a"
 	orangeColor := "rgba(237, 129, 40, 0.89)"
-	lightBlueColor := "rgba(31, 118, 189, 0.18)"
-	whiteColor := "rgb(31, 120, 193)"
 
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
@@ -240,14 +264,30 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 					ShowThresholdLabels:  false,
 					ShowThresholdMarkers: true,
 				},
-				Colors:     []string{greenColor, orangeColor, redColor},
-				DataSource: "${DS_PROMETHEUS}",
-				Format:     "percentunit",
-				Gauge: GrafanaDashboardConfigPanelGauge{
-					MaxValue:         100,
-					MinValue:         0,
-					Show:             true,
-					ThresholdMarkers: true,
+				FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+					Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+						Color: GrafanaDashboardConfigPanelFieldConfigDefaultsColor{
+							Mode: "thresholds",
+						},
+						Thresholds: GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds{
+							Mode: "absolute",
+							Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
+								{
+									Color: greenColor,
+								},
+								{
+									Color: orangeColor,
+									Value: 80,
+								},
+								{
+									Color: redColor,
+									Value: 90,
+								},
+							},
+							Max:  100,
+							Unit: "percentunit",
+						},
+					},
 				},
 				MaxDataPoints: 100,
 				Targets: []GrafanaDashboardConfigPanelTarget{
@@ -256,19 +296,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 						Format:         "time_series",
 						IntervalFactor: 1,
 						RefId:          "A",
-					},
-				},
-				Sparkline: GrafanaDashboardConfigPanelSparkline{
-					FillColor: lightBlueColor,
-					Full:      false,
-					LineColor: whiteColor,
-					Show:      false,
-				},
-				RangeMaps: []GrafanaDashboardConfigPanelRangeMap{
-					{
-						From: "null",
-						Text: "N/A",
-						To:   "null",
 					},
 				},
 			},
