@@ -35,29 +35,6 @@ type GrafanaDashboardConfigTimepicker struct {
 	TimeOptions      []string `json:"time_options"`
 }
 
-type GrafanaDashboardConfigTemplatingListItemCurrent struct {
-	Text  string `json:"text,omitempty"`
-	Value string `json:"value,omitempty"`
-}
-
-type GrafanaDashboardConfigTemplatingListItemOptions struct {
-	Selected bool   `json:"selected,omitempty"`
-	Text     string `json:"text,omitempty"`
-	Value    string `json:"value,omitempty"`
-}
-
-type GrafanaDashboardConfigTemplatingListItem struct {
-	Current GrafanaDashboardConfigTemplatingListItemCurrent   `json:"current"`
-	Name    string                                            `json:"name"`
-	Query   string                                            `json:"query"`
-	Type    string                                            `json:"type"`
-	Options []GrafanaDashboardConfigTemplatingListItemOptions `json:"options"`
-}
-
-type GrafanaDashboardConfigTemplating struct {
-	List []GrafanaDashboardConfigTemplatingListItem `json:"list,omitempty"`
-}
-
 type GrafanaDashboardConfigPanelGridPos struct {
 	H int `json:"h,omitempty"`
 	W int `json:"w,omitempty"`
