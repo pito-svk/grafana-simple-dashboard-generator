@@ -138,6 +138,9 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
+	clusterCPUExpr := "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable_pods{node=~\".*\"})"
+	// clusterMemoryExpr := ""
+
 	configTime := GrafanaDashboardConfigTime{
 		From: "now-6h",
 		To:   "now",
@@ -248,7 +251,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		MaxDataPoints: 100,
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
-				Expr:           "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable_pods{node=~\".*\"})",
+				Expr:           clusterCPUExpr,
 				Format:         "time_series",
 				IntervalFactor: 1,
 				RefId:          "A",
