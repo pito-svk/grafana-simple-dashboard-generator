@@ -25,16 +25,6 @@ type GrafanaDashboardParams struct {
 	Title string
 }
 
-type GrafanaDashboardConfigTime struct {
-	From string `json:"from,omitempty"`
-	To   string `json:"to,omitempty"`
-}
-
-type GrafanaDashboardConfigTimepicker struct {
-	RefreshIntervals []string `json:"refresh_intervals"`
-	TimeOptions      []string `json:"time_options"`
-}
-
 type GrafanaDashboardConfigPanelGridPos struct {
 	H int `json:"h,omitempty"`
 	W int `json:"w,omitempty"`
@@ -148,58 +138,66 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
+	configTime := GrafanaDashboardConfigTime{
+		From: "now-6h",
+		To:   "now",
+	}
+
+	refreshIntervals := []string{
+		"5s",
+		"10s",
+		"30s",
+		"1m",
+		"5m",
+		"15m",
+		"30m",
+		"1h",
+		"2h",
+		"1d"}
+
+	timeOptions := []string{
+		"5m",
+		"15m",
+		"1h",
+		"6h",
+		"12h",
+		"24h",
+		"2d",
+		"7d",
+		"30d"}
+
+	templating := GrafanaDashboardConfigTemplating{
+		List: []GrafanaDashboardConfigTemplatingListItem{
+			{
+				Current: GrafanaDashboardConfigTemplatingListItemCurrent{
+					Text:  ".*",
+					Value: ".*",
+				},
+				Name: "node",
+				Options: []GrafanaDashboardConfigTemplatingListItemOptions{
+					{
+						Selected: true,
+						Text:     ".*",
+						Value:    ".*",
+					},
+				},
+				Query: ".*",
+				Type:  "constant",
+			},
+		},
+	}
+
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
-		Time: GrafanaDashboardConfigTime{
-			From: "now-6h",
-			To:   "now",
-		},
+		Time:         configTime,
 		Timepicker: GrafanaDashboardConfigTimepicker{
-			RefreshIntervals: []string{
-				"5s",
-				"10s",
-				"30s",
-				"1m",
-				"5m",
-				"15m",
-				"30m",
-				"1h",
-				"2h",
-				"1d"},
-			TimeOptions: []string{
-				"5m",
-				"15m",
-				"1h",
-				"6h",
-				"12h",
-				"24h",
-				"2d",
-				"7d",
-				"30d"},
+			RefreshIntervals: refreshIntervals,
+			TimeOptions:      timeOptions,
 		},
-		Templating: GrafanaDashboardConfigTemplating{
-			List: []GrafanaDashboardConfigTemplatingListItem{
-				{
-					Current: GrafanaDashboardConfigTemplatingListItemCurrent{
-						Text:  ".*",
-						Value: ".*",
-					},
-					Name: "node",
-					Options: []GrafanaDashboardConfigTemplatingListItemOptions{
-						{
-							Selected: true,
-							Text:     ".*",
-							Value:    ".*",
-						},
-					},
-					Query: ".*",
-					Type:  "constant",
-				},
-			},
-		},
+		Templating:    templating,
 		Refresh:       "5s",
 		SchemaVersion: 1,
 		Version:       1,

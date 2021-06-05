@@ -21,8 +21,7 @@ THE SOFTWARE.
 */
 package dashboard
 
-const (
-	GREEN_COLOR  = "rgb(41, 156, 70)"
-	ORANGE_COLOR = "rgba(237, 129, 40, 0.89)"
-	RED_COLOR    = "rgb(212, 74, 58)"
-)
+type GrafanaDashboardConfigTimepicker struct {
+	RefreshIntervals []string `json:"refresh_intervals"`
+	TimeOptions      []string `json:"time_options"`
+}
