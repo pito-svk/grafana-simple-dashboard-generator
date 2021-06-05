@@ -273,6 +273,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Panels: []GrafanaDashboardConfigPanel{
 			clusterMetricsRow,
 			clusterCPU,
+			// clusterMemory
 		},
 		Annotations: []string{},
 		Inputs: []GrafanaDashboardConfigInput{
