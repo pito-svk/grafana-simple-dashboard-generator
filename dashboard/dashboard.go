@@ -148,10 +148,6 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
-	greenColor := "#299c46"
-	redColor := "#d44a3a"
-	orangeColor := "rgba(237, 129, 40, 0.89)"
-
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
 		Timezone:     "browser",
@@ -248,14 +244,14 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 							Mode: "percentage",
 							Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
 								{
-									Color: greenColor,
+									Color: GREEN_COLOR,
 								},
 								{
-									Color: orangeColor,
+									Color: ORANGE_COLOR,
 									Value: 80,
 								},
 								{
-									Color: redColor,
+									Color: RED_COLOR,
 									Value: 90,
 								},
 							},
