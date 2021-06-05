@@ -45,7 +45,7 @@ var initCmd = &cobra.Command{
 			return fmt.Errorf("invalid value for output. Allowed values: [\"console\", \"file\"]")
 		}
 
-		if mode != "basic" {
+		if mode != "default" {
 			return fmt.Errorf("invalid value for mode. Allowed values: [\"default\"]")
 		}
 
