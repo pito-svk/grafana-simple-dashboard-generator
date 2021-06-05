@@ -187,6 +187,75 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
+	clusterHealthRow := GrafanaDashboardConfigPanel{
+		Id: 1,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 1,
+			W: 24,
+			X: 0,
+			Y: 0,
+		},
+		Title: "Cluster Health",
+		Type:  "row",
+	}
+
+	clusterCPU := GrafanaDashboardConfigPanel{
+		Id: 2,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 6,
+			W: 4,
+			X: 0,
+			Y: 1,
+		},
+		Title: "Cluster Pod Usage",
+		Type:  "gauge",
+		Options: GrafanaDashboardConfigPanelOptions{
+			Orientation: "horizontal",
+			ReduceOptions: GrafanaDashboardConfigPanelOptionsReduceOptions{
+				Calcs:  []string{"mean"},
+				Fields: "",
+				Values: false,
+			},
+			ShowThresholdLabels:  false,
+			ShowThresholdMarkers: true,
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Color: GrafanaDashboardConfigPanelFieldConfigDefaultsColor{
+					Mode: "thresholds",
+				},
+				Thresholds: GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds{
+					Mode: "percentage",
+					Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
+						{
+							Color: GREEN_COLOR,
+						},
+						{
+							Color: ORANGE_COLOR,
+							Value: 80,
+						},
+						{
+							Color: RED_COLOR,
+							Value: 90,
+						},
+					},
+					Max:  100,
+					Unit: "percentunit",
+				},
+				Unit: "percentunit",
+			},
+		},
+		MaxDataPoints: 100,
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				Expr:           "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable_pods{node=~\".*\"})",
+				Format:         "time_series",
+				IntervalFactor: 1,
+				RefId:          "A",
+			},
+		},
+	}
+
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
 		Timezone:     "browser",
@@ -202,73 +271,8 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		SchemaVersion: 1,
 		Version:       1,
 		Panels: []GrafanaDashboardConfigPanel{
-			{
-				Id: 1,
-				GridPos: GrafanaDashboardConfigPanelGridPos{
-					H: 1,
-					W: 24,
-					X: 0,
-					Y: 0,
-				},
-				Title: "Cluster Health",
-				Type:  "row",
-			},
-			{
-				Id: 2,
-				GridPos: GrafanaDashboardConfigPanelGridPos{
-					H: 6,
-					W: 4,
-					X: 0,
-					Y: 1,
-				},
-				Title: "Cluster Pod Usage",
-				Type:  "gauge",
-				Options: GrafanaDashboardConfigPanelOptions{
-					Orientation: "horizontal",
-					ReduceOptions: GrafanaDashboardConfigPanelOptionsReduceOptions{
-						Calcs:  []string{"mean"},
-						Fields: "",
-						Values: false,
-					},
-					ShowThresholdLabels:  false,
-					ShowThresholdMarkers: true,
-				},
-				FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
-					Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
-						Color: GrafanaDashboardConfigPanelFieldConfigDefaultsColor{
-							Mode: "thresholds",
-						},
-						Thresholds: GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds{
-							Mode: "percentage",
-							Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
-								{
-									Color: GREEN_COLOR,
-								},
-								{
-									Color: ORANGE_COLOR,
-									Value: 80,
-								},
-								{
-									Color: RED_COLOR,
-									Value: 90,
-								},
-							},
-							Max:  100,
-							Unit: "percentunit",
-						},
-						Unit: "percentunit",
-					},
-				},
-				MaxDataPoints: 100,
-				Targets: []GrafanaDashboardConfigPanelTarget{
-					{
-						Expr:           "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable_pods{node=~\".*\"})",
-						Format:         "time_series",
-						IntervalFactor: 1,
-						RefId:          "A",
-					},
-				},
-			},
+			clusterHealthRow,
+			clusterCPU,
 		},
 		Annotations: []string{},
 		Inputs: []GrafanaDashboardConfigInput{
