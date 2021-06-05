@@ -187,7 +187,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
-	clusterHealthRow := GrafanaDashboardConfigPanel{
+	clusterMetricsRow := GrafanaDashboardConfigPanel{
 		Id: 1,
 		GridPos: GrafanaDashboardConfigPanelGridPos{
 			H: 1,
@@ -195,7 +195,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			X: 0,
 			Y: 0,
 		},
-		Title: "Cluster Health",
+		Title: "Cluster metrics",
 		Type:  "row",
 	}
 
@@ -271,7 +271,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		SchemaVersion: 1,
 		Version:       1,
 		Panels: []GrafanaDashboardConfigPanel{
-			clusterHealthRow,
+			clusterMetricsRow,
 			clusterCPU,
 		},
 		Annotations: []string{},
