@@ -138,7 +138,7 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
-	clusterCPUExpr := "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable_pods{node=~\".*\"})"
+	clusterCPUExpr := "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",container!=\"\"}[5m]))"
 	// clusterMemoryExpr := ""
 
 	configTime := GrafanaDashboardConfigTime{
