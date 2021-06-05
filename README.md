@@ -9,3 +9,4 @@ TODO:
 - alerting []
 - connectors (Slack, Teams) []
 - nginx response times (in advanced mode) []
+- make deployable via Helm []
