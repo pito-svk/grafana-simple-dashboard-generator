@@ -141,34 +141,6 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 	clusterCPUExpr := "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",container!=\"\"}[5m]))"
 	// clusterMemoryExpr := ""
 
-	configTime := GrafanaDashboardConfigTime{
-		From: "now-6h",
-		To:   "now",
-	}
-
-	refreshIntervals := []string{
-		"5s",
-		"10s",
-		"30s",
-		"1m",
-		"5m",
-		"15m",
-		"30m",
-		"1h",
-		"2h",
-		"1d"}
-
-	timeOptions := []string{
-		"5m",
-		"15m",
-		"1h",
-		"6h",
-		"12h",
-		"24h",
-		"2d",
-		"7d",
-		"30d"}
-
 	templating := GrafanaDashboardConfigTemplating{
 		List: []GrafanaDashboardConfigTemplatingListItem{
 			{
@@ -264,10 +236,10 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Timezone:     "browser",
 		Editable:     true,
 		GraphTooltip: 1,
-		Time:         configTime,
+		Time:         CONFIG_TIME,
 		Timepicker: GrafanaDashboardConfigTimepicker{
-			RefreshIntervals: refreshIntervals,
-			TimeOptions:      timeOptions,
+			RefreshIntervals: REFRESH_INTERVALS,
+			TimeOptions:      TIME_OPTIONS,
 		},
 		Templating:    templating,
 		Refresh:       "5s",

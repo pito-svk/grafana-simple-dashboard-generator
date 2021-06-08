@@ -26,3 +26,31 @@ const (
 	ORANGE_COLOR = "rgba(237, 129, 40, 0.89)"
 	RED_COLOR    = "rgb(212, 74, 58)"
 )
+
+var REFRESH_INTERVALS = []string{
+	"5s",
+	"10s",
+	"30s",
+	"1m",
+	"5m",
+	"15m",
+	"30m",
+	"1h",
+	"2h",
+	"1d"}
+
+var TIME_OPTIONS = []string{
+	"5m",
+	"15m",
+	"1h",
+	"6h",
+	"12h",
+	"24h",
+	"2d",
+	"7d",
+	"30d"}
+
+var CONFIG_TIME = GrafanaDashboardConfigTime{
+	From: "now-6h",
+	To:   "now",
+}
