@@ -22,7 +22,7 @@ THE SOFTWARE.
 package dashboard
 
 // TODO: Implement
-// TODO: Allow filtering by node/s
+// TODO: Advanced Allow filtering by node/s, node selectors
 // var ClusterMemoryRate = ""
 // var ClusterMemoryUsed = ""
 // var ClusterMemoryTotal = ""
