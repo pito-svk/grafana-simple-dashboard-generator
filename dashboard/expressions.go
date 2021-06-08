@@ -21,9 +21,11 @@ THE SOFTWARE.
 */
 package dashboard
 
-var ClusterCPURate = "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",container!=\"\"}[5m]))"
-
 // TODO: Implement
 // var ClusterMemoryRate = ""
+// var ClusterMemoryUsed = ""
+// var ClusterMemoryTotal = ""
+
+var ClusterCPURate = "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",container!=\"\"}[5m]))"
 // var ClusterCoresUsedCount = ""
 // var ClusterCoresTotalCount = ""
