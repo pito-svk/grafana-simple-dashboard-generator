@@ -22,6 +22,7 @@ THE SOFTWARE.
 package dashboard
 
 // TODO: Implement
+// TODO: Allow filtering by node/s
 // var ClusterMemoryRate = ""
 // var ClusterMemoryUsed = ""
 // var ClusterMemoryTotal = ""
