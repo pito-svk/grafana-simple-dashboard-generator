@@ -33,3 +33,7 @@ var ClusterCPURate = "sum(rate(container_cpu_usage_seconds_total{container!=\"PO
 // var ClusterDiskUsageRate = ""
 // var ClusterDiskUsageUsed = ""
 // var ClusterDiskUsageTotal = ""
+
+// TODO: Advanced Nginx metrics
+// var NginxRequestsPerSecondRate = ""
+// var NginxResponseTimeRate = ""
