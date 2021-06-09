@@ -162,27 +162,72 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
-	clusterMetricsRow := GrafanaDashboardConfigPanel{
+	clusterMemoryRateGauge := GrafanaDashboardConfigPanel{
 		Id: 1,
 		GridPos: GrafanaDashboardConfigPanelGridPos{
-			H: 1,
-			W: 24,
+			H: 5,
+			W: 8,
 			X: 0,
 			Y: 0,
 		},
-		Title: "Cluster metrics",
-		Type:  "row",
+		Title: "Cluster memory usage",
+		Type: "gauge",
+		Options: GrafanaDashboardConfigPanelOptions{
+			Orientation: "horizontal",
+			ReduceOptions: GrafanaDashboardConfigPanelOptionsReduceOptions{
+				Calcs:  []string{"mean"},
+				Fields: "",
+				Values: false,
+			},
+			ShowThresholdLabels:  false,
+			ShowThresholdMarkers: true,
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Color: GrafanaDashboardConfigPanelFieldConfigDefaultsColor{
+					Mode: "thresholds",
+				},
+				Thresholds: GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds{
+					Mode: "percentage",
+					Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
+						{
+							Color: GREEN_COLOR,
+						},
+						{
+							Color: ORANGE_COLOR,
+							Value: 80,
+						},
+						{
+							Color: RED_COLOR,
+							Value: 90,
+						},
+					},
+					Max:  100,
+					Unit: "percentunit",
+				},
+				Unit: "percentunit",
+			},
+		},
+		MaxDataPoints: 100,
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				Expr:           clusterCPUExpr,
+				Format:         "time_series",
+				IntervalFactor: 1,
+				RefId:          "A",
+			},
+		},
 	}
 
-	clusterCPU := GrafanaDashboardConfigPanel{
+	clusterCPURateGauge := GrafanaDashboardConfigPanel{
 		Id: 2,
 		GridPos: GrafanaDashboardConfigPanelGridPos{
-			H: 6,
-			W: 4,
-			X: 0,
-			Y: 1,
+			H: 5,
+			W: 8,
+			X: 8,
+			Y: 0,
 		},
-		Title: "Cluster Pod Usage",
+		Title: "Cluster CPU usage",
 		Type:  "gauge",
 		Options: GrafanaDashboardConfigPanelOptions{
 			Orientation: "horizontal",
@@ -246,9 +291,9 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		SchemaVersion: 1,
 		Version:       1,
 		Panels: []GrafanaDashboardConfigPanel{
-			clusterMetricsRow,
-			clusterCPU,
-			// clusterMemory
+			// clusterMetricsRow,
+			clusterMemoryRateGauge,
+			clusterCPURateGauge,
 		},
 		Annotations: []string{},
 		Inputs: []GrafanaDashboardConfigInput{
