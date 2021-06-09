@@ -162,7 +162,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
-	clusterMemoryRateGauge := GrafanaDashboardConfigPanel{
+	clusterMemoryUsageRateGauge := GrafanaDashboardConfigPanel{
 		Id: 1,
 		GridPos: GrafanaDashboardConfigPanelGridPos{
 			H: 5,
@@ -219,7 +219,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
-	clusterCPURateGauge := GrafanaDashboardConfigPanel{
+	clusterCPUUsageRateGauge := GrafanaDashboardConfigPanel{
 		Id: 2,
 		GridPos: GrafanaDashboardConfigPanelGridPos{
 			H: 5,
@@ -276,6 +276,64 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
+	clusterDiskUsageRateGauge := GrafanaDashboardConfigPanel{
+		Id: 3,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 5,
+			W: 8,
+			X: 16,
+			Y: 0,
+		},
+		Title: "Cluster filesystem usage",
+		Type:  "gauge",
+		Options: GrafanaDashboardConfigPanelOptions{
+			Orientation: "horizontal",
+			ReduceOptions: GrafanaDashboardConfigPanelOptionsReduceOptions{
+				Calcs:  []string{"mean"},
+				Fields: "",
+				Values: false,
+			},
+			ShowThresholdLabels:  false,
+			ShowThresholdMarkers: true,
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Color: GrafanaDashboardConfigPanelFieldConfigDefaultsColor{
+					Mode: "thresholds",
+				},
+				Thresholds: GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds{
+					Mode: "percentage",
+					Steps: []GrafanaDashboardConfigPanelFieldConfigDefaultsThresholdsStep{
+						{
+							Color: GREEN_COLOR,
+						},
+						{
+							Color: ORANGE_COLOR,
+							Value: 80,
+						},
+						{
+							Color: RED_COLOR,
+							Value: 90,
+						},
+					},
+					Max:  100,
+					Unit: "percentunit",
+				},
+				Unit: "percentunit",
+			},
+		},
+		MaxDataPoints: 100,
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				Expr:           clusterCPUExpr,
+				Format:         "time_series",
+				IntervalFactor: 1,
+				RefId:          "A",
+			},
+		},
+	}
+
+
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
 		Timezone:     "browser",
@@ -292,8 +350,9 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		Version:       1,
 		Panels: []GrafanaDashboardConfigPanel{
 			// clusterMetricsRow,
-			clusterMemoryRateGauge,
-			clusterCPURateGauge,
+			clusterMemoryUsageRateGauge,
+			clusterCPUUsageRateGauge,
+			clusterDiskUsageRateGauge,
 		},
 		Annotations: []string{},
 		Inputs: []GrafanaDashboardConfigInput{
