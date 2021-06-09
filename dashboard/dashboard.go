@@ -333,6 +333,77 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 	}
 
+	memoryUsageUsed := GrafanaDashboardConfigPanel{
+		Id: 4,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 3,
+			W: 4,
+			X: 0,
+			Y: 5,
+		},
+		Title: "Used",
+		Type: "singlestat",
+	}
+
+	memoryUsageTotal := GrafanaDashboardConfigPanel{
+		Id: 5,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 3,
+			W: 4,
+			X: 4,
+			Y: 5,
+		},
+		Title: "Total",
+		Type: "singlestat",
+	}
+
+	CPUUsageUsed := GrafanaDashboardConfigPanel{
+		Id: 6,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 3,
+			W: 4,
+			X: 8,
+			Y: 5,
+		},
+		Title: "Used",
+		Type: "singlestat",
+	}
+
+	CPUUsageTotal := GrafanaDashboardConfigPanel{
+		Id: 7,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 3,
+			W: 4,
+			X: 12,
+			Y: 5,
+		},
+		Title: "Total",
+		Type: "singlestat",
+	}
+
+	DiskUsageUsed := GrafanaDashboardConfigPanel{
+		Id: 8,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 3,
+			W: 4,
+			X: 16,
+			Y: 5,
+		},
+		Title: "Used",
+		Type: "singlestat",
+	}
+
+	DiskUsageTotal := GrafanaDashboardConfigPanel{
+		Id: 9,
+		GridPos: GrafanaDashboardConfigPanelGridPos{
+			H: 3,
+			W: 4,
+			X: 20,
+			Y: 5,
+		},
+		Title: "Total",
+		Type: "singlestat",
+	}
 
 	return &GrafanaDashboardConfig{
 		Title:        params.Title,
@@ -349,10 +420,15 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		SchemaVersion: 1,
 		Version:       1,
 		Panels: []GrafanaDashboardConfigPanel{
-			// clusterMetricsRow,
 			clusterMemoryUsageRateGauge,
 			clusterCPUUsageRateGauge,
 			clusterDiskUsageRateGauge,
+			memoryUsageUsed,
+			memoryUsageTotal,
+			CPUUsageUsed,
+			CPUUsageTotal,
+			DiskUsageUsed,
+			DiskUsageTotal,
 		},
 		Annotations: []string{},
 		Inputs: []GrafanaDashboardConfigInput{
