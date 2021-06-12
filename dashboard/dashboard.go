@@ -367,6 +367,15 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		Title: "Used",
 		Type: "singlestat",
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				// TODO: Implement
+				Expr: "",
+				Format: "",
+				IntervalFactor: 1,
+				RefId: "A",
+			},
+		},
 	}
 
 	CPUUsageTotal := GrafanaDashboardConfigPanel{
