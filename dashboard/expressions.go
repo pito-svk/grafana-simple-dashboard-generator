@@ -28,7 +28,7 @@ var ClusterMemoryRate = "sum(1 - (node_memory_MemAvailable_bytes / node_memory_M
 // var ClusterMemoryUsed = ""
 // var ClusterMemoryTotal = ""
 
-var ClusterCPURate = "1 - avg without (mode,cpu) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))"
+var ClusterCPURate = "sum(1 - avg without (mode,cpu) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))) / sum(kube_node_info)"
 // var ClusterCoresUsedCount = ""
 // var ClusterCoresTotalCount = ""
 
