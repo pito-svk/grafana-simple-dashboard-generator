@@ -23,11 +23,11 @@ package dashboard
 
 // TODO: Implement
 // TODO: Advanced Allow filtering by node/s, node selectors
-// var ClusterMemoryRate = ""
+var ClusterMemoryRate = "100 - (((node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) or ((node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) / node_memory_MemTotal_bytes)) * 100)"
 // var ClusterMemoryUsed = ""
 // var ClusterMemoryTotal = ""
 
-var ClusterCPURate = "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",container!=\"\"}[5m]))"
+var ClusterCPURate = "1 - avg without (mode,cpu) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))"
 // var ClusterCoresUsedCount = ""
 // var ClusterCoresTotalCount = ""
 
