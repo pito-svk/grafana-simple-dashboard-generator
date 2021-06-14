@@ -138,9 +138,6 @@ type GrafanaDashboardConfig struct {
 }
 
 func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
-	clusterCPUExpr := "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",container!=\"\"}[5m]))"
-	// clusterMemoryExpr := ""
-
 	templating := GrafanaDashboardConfigTemplating{
 		List: []GrafanaDashboardConfigTemplatingListItem{
 			{
@@ -211,7 +208,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		MaxDataPoints: 100,
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
-				Expr:           clusterCPUExpr,
+				Expr:           ClusterMemoryRate,
 				Format:         "time_series",
 				IntervalFactor: 1,
 				RefId:          "A",
@@ -268,7 +265,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		MaxDataPoints: 100,
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
-				Expr:           clusterCPUExpr,
+				Expr:           ClusterCPURate,
 				Format:         "time_series",
 				IntervalFactor: 1,
 				RefId:          "A",
@@ -325,7 +322,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		MaxDataPoints: 100,
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
-				Expr:           clusterCPUExpr,
+				Expr:           "",
 				Format:         "time_series",
 				IntervalFactor: 1,
 				RefId:          "A",

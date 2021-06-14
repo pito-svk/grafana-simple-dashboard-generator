@@ -22,8 +22,9 @@ THE SOFTWARE.
 package dashboard
 
 // TODO: Implement
+// TODO: Test if queries really work by increasing requests limit as well as real increasing of memroy - has to be some docker image which handled=s this
 // TODO: Advanced Allow filtering by node/s, node selectors
-var ClusterMemoryRate = "100 - (((node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) or ((node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) / node_memory_MemTotal_bytes)) * 100)"
+var ClusterMemoryRate = "sum(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) or ((node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) / node_memory_MemTotal_bytes)) / sum(kube_node_info)"
 // var ClusterMemoryUsed = ""
 // var ClusterMemoryTotal = ""
 
