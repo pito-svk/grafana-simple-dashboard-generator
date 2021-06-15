@@ -67,6 +67,8 @@ type GrafanaDashboardConfigPanelOptionsReduceOptions struct {
 }
 
 type GrafanaDashboardConfigPanelOptions struct {
+	ColorMode            string                                          `json:"colorMode,omitempty"`
+	GraphMode            string                                          `json:"graphMode,omitempty"`
 	Orientation          string                                          `json:"orientation,omitempty"`
 	ReduceOptions        GrafanaDashboardConfigPanelOptionsReduceOptions `json:"reduceOptions,omitempty"`
 	ShowThresholdLabels  bool                                            `json:"showThresholdLabels"`
@@ -168,7 +170,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 0,
 		},
 		Title: "Cluster memory usage",
-		Type: "gauge",
+		Type:  "gauge",
 		Options: GrafanaDashboardConfigPanelOptions{
 			Orientation: "horizontal",
 			ReduceOptions: GrafanaDashboardConfigPanelOptionsReduceOptions{
@@ -339,7 +341,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Used",
-		Type: "stat",
+		Type:  "stat",
 	}
 
 	memoryUsageTotal := GrafanaDashboardConfigPanel{
@@ -351,7 +353,11 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Total",
-		Type: "stat",
+		Type:  "stat",
+		Options: GrafanaDashboardConfigPanelOptions{
+			ColorMode: "value",
+			GraphMode: "none",
+		},
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
 				Expr:           ClusterMemoryTotal,
@@ -376,14 +382,14 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Used",
-		Type: "singlestat",
+		Type:  "singlestat",
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
 				// TODO: Implement
-				Expr: "",
-				Format: "",
+				Expr:           "",
+				Format:         "",
 				IntervalFactor: 1,
-				RefId: "A",
+				RefId:          "A",
 			},
 		},
 	}
@@ -397,7 +403,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Total",
-		Type: "singlestat",
+		Type:  "singlestat",
 	}
 
 	DiskUsageUsed := GrafanaDashboardConfigPanel{
@@ -409,7 +415,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Used",
-		Type: "singlestat",
+		Type:  "singlestat",
 	}
 
 	DiskUsageTotal := GrafanaDashboardConfigPanel{
@@ -421,7 +427,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Total",
-		Type: "singlestat",
+		Type:  "singlestat",
 	}
 
 	return &GrafanaDashboardConfig{
