@@ -342,6 +342,23 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		Title: "Used",
 		Type:  "stat",
+		Options: GrafanaDashboardConfigPanelOptions{
+			ColorMode: "value",
+			GraphMode: "none",
+		},
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				Expr:           ClusterMemoryUsed,
+				Format:         "time_series",
+				IntervalFactor: 1,
+				RefId:          "A",
+			},
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Unit: "decbytes",
+			},
+		},
 	}
 
 	memoryUsageTotal := GrafanaDashboardConfigPanel{
