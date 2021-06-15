@@ -339,7 +339,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Used",
-		Type: "singlestat",
+		Type: "stat",
 	}
 
 	memoryUsageTotal := GrafanaDashboardConfigPanel{
@@ -351,13 +351,18 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Total",
-		Type: "singlestat",
+		Type: "stat",
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
 				Expr:           ClusterMemoryTotal,
 				Format:         "time_series",
 				IntervalFactor: 1,
 				RefId:          "A",
+			},
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Unit: "angle",
 			},
 		},
 	}
