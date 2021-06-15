@@ -368,7 +368,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
 			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
-				Unit: "angle",
+				Unit: "gbytes",
 			},
 		},
 	}
