@@ -26,7 +26,7 @@ package dashboard
 // TODO: Advanced Allow filtering by node/s, node selectors
 var ClusterMemoryRate = "sum(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) or ((node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) / node_memory_MemTotal_bytes)) / sum(kube_node_info)"
 
-var ClusterMemoryUsed = "sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)"
+var ClusterMemoryUsed = "sum(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)"
 var ClusterMemoryTotal = "sum(node_memory_MemTotal_bytes)"
 
 var ClusterCPURate = "sum(1 - avg without (mode,cpu) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))) / sum(kube_node_info)"
