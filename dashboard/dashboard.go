@@ -399,7 +399,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Used",
-		Type:  "singlestat",
+		Type:  "stat",
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
 				// TODO: Implement
@@ -420,7 +420,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Total",
-		Type:  "singlestat",
+		Type:  "stat",
 	}
 
 	DiskUsageUsed := GrafanaDashboardConfigPanel{
@@ -432,7 +432,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Used",
-		Type:  "singlestat",
+		Type:  "stat",
 	}
 
 	DiskUsageTotal := GrafanaDashboardConfigPanel{
@@ -444,7 +444,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 			Y: 5,
 		},
 		Title: "Total",
-		Type:  "singlestat",
+		Type:  "stat",
 	}
 
 	return &GrafanaDashboardConfig{
