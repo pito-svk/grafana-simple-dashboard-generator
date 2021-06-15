@@ -352,6 +352,14 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		Title: "Total",
 		Type: "singlestat",
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				Expr:           ClusterMemoryTotal,
+				Format:         "time_series",
+				IntervalFactor: 1,
+				RefId:          "A",
+			},
+		},
 	}
 
 	CPUUsageUsed := GrafanaDashboardConfigPanel{
