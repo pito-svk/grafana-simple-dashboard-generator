@@ -414,7 +414,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
 			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
-				Unit: "decbytes",
+				Unit: "cores",
 			},
 		},
 	}
@@ -443,7 +443,7 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
 			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
-				Unit: "decbytes",
+				Unit: "cores",
 			},
 		},
 	}
