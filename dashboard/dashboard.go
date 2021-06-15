@@ -94,6 +94,7 @@ type GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds struct {
 type GrafanaDashboardConfigPanelFieldConfigDefaults struct {
 	Color      GrafanaDashboardConfigPanelFieldConfigDefaultsColor      `json:"color,omitempty"`
 	Thresholds GrafanaDashboardConfigPanelFieldConfigDefaultsThresholds `json:"thresholds,omitempty"`
+	Decimals   int                                                      `json:"decimals,omitempty"`
 	Unit       string                                                   `json:"unit,omitempty"`
 }
 
@@ -414,7 +415,8 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
 			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
-				Unit: "cores",
+				Unit:     "cores",
+				Decimals: 2,
 			},
 		},
 	}
