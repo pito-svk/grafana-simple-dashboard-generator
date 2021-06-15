@@ -400,13 +400,21 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		Title: "Used",
 		Type:  "stat",
+		Options: GrafanaDashboardConfigPanelOptions{
+			ColorMode: "value",
+			GraphMode: "none",
+		},
 		Targets: []GrafanaDashboardConfigPanelTarget{
 			{
-				// TODO: Implement
-				Expr:           "",
-				Format:         "",
+				Expr:           ClusterCoresUsedCount,
+				Format:         "time_series",
 				IntervalFactor: 1,
 				RefId:          "A",
+			},
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Unit: "decbytes",
 			},
 		},
 	}
@@ -421,6 +429,23 @@ func GenerateDashboard(params *GrafanaDashboardParams) interface{} {
 		},
 		Title: "Total",
 		Type:  "stat",
+		Options: GrafanaDashboardConfigPanelOptions{
+			ColorMode: "value",
+			GraphMode: "none",
+		},
+		Targets: []GrafanaDashboardConfigPanelTarget{
+			{
+				Expr:           ClusterCoresTotalCount,
+				Format:         "time_series",
+				IntervalFactor: 1,
+				RefId:          "A",
+			},
+		},
+		FieldConfig: GrafanaDashboardConfigPanelFieldConfig{
+			Defaults: GrafanaDashboardConfigPanelFieldConfigDefaults{
+				Unit: "decbytes",
+			},
+		},
 	}
 
 	DiskUsageUsed := GrafanaDashboardConfigPanel{
